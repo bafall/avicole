@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ 
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login/"/>
+        <property name="successUrl" value="/"/>
+        <property name="unauthorizedUrl" value="/nonautorise/"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /login/ = authc
+                /logout/ = logout 
+                /nonautorise/ = anon
+                /#!erreur/ = anon
+                /#!admin/** = authc, roles[utilisateur, client, administrateur]
+                <!-- /** = authc, roles[utilisateur, client, administrateur] -->
+            </value>
+        </property>
+    </bean>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+    </bean>
+
+    <bean id="myRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+    <property name="dataSource" ref="dataSource">
+    </property>
+        <property name="authenticationQuery" value="SELECT MOT_PASSE FROM employe WHERE CODE_EMPLOYE = ?">
+            <!--value>
+                employe = user, employe, client
+                client = client, client
+                administrateur = admin, employe, administrateur, client
+            </value-->
+        </property>
+        <property name="userRolesQuery" value="SELECT CODE_ROLE FROM role_employe WHERE CODE_EMPLOYE = ?"></property>
+    </bean>
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
+    <!-- the lifecycleBeanProcessor has run: -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+    
+     <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/pavsn"/>
+        <property name="username" value="dev"/>
+        <property name="password" value="test"/>
+    </bean>
+    
+    <!-- Enable Shiro Annotations for Spring-configured beans.  Only run after -->
+    <!-- the lifecycleBeanProcessor has run: -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    	<property name="securityManager" ref="securityManager"/>
+	</bean>
+
+
+</beans>

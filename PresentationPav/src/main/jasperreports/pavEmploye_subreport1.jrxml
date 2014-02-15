@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pavEmploye_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="774ce632-4e4e-4c24-a925-e6371df79b9d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="role" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from role_employe where CODE_ROLE like $P{role}]]>
+	</queryString>
+	<field name="CODE_ROLE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CODE_EMPLOYE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CODE_APPLICATION" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DATE_DEBUT_ACTIVITE" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DATE_FIN_ACTIVITE" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DESC_PERIODE_ACTIVITE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CREE_PAR" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DATE_CREATION" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MODIFIE_PAR" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DATE_MODIFICATION" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="CODE_ROLE">
+		<groupExpression><![CDATA[$F{CODE_ROLE}]]></groupExpression>
+	</group>
+	<group name="CODE_EMPLOYE">
+		<groupExpression><![CDATA[$F{CODE_EMPLOYE}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5566b95a-51d9-4f8e-b09e-2c3fd76fabf4" x="0" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code Role]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ad4fbe4-fe40-427a-9976-34bc63c31b02" x="100" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Employe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="59810f33-d5fe-44eb-b2a9-2ac7a1f26f37" x="200" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Créé par ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8cc33dc3-4f9d-4830-805e-983a65d338d8" x="300" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Création]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="5d5ce4ff-73d0-469f-adb9-e85ddb85e725" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CODE_ROLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e11587c0-270c-4507-95b5-32758140e9b4" x="100" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CODE_EMPLOYE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="eec153dc-5d8f-4280-a4fb-341b3f1f4f11" x="200" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CREE_PAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f621df84-dd24-4b6c-ad08-b0ef3269f7eb" x="300" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{DATE_CREATION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
